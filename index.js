@@ -3,6 +3,10 @@ const dotenv = require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.get("/", (_, res) => {
+  res.status(200).json({ message: "welcome to the stage one HNGX project" });
+});
+
 app.get("/api/", (req, res) => {
   const { slack_name, track } = req.query;
 
