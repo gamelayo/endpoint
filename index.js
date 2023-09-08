@@ -16,15 +16,22 @@ app.get("/api/", (req, res) => {
       .json({ error: "slack_name and track are required parameters" });
   }
   //   Current UTC Time
-  const utc_time = new Date();
+  const currentUTCTime = new Date();
+  const year = currentUTCTime.getUTCFullYear();
+  const month = String(currentUTCTime.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(currentUTCTime.getUTCDate()).padStart(2, "0");
+  const hours = String(currentUTCTime.getUTCHours()).padStart(2, "0");
+  const minutes = String(currentUTCTime.getUTCMinutes()).padStart(2, "0");
+  const seconds = String(currentUTCTime.getUTCSeconds()).padStart(2, "0");
+  const utc_time = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}Z`;
   //   Two minute ahead
-  const twoMinutesAhead = new Date(utc_time);
-  twoMinutesAhead.setUTCMinutes(utc_time.getUTCMinutes() + 2);
+  const twoMinutesAhead = new Date(currentUTCTime);
+  twoMinutesAhead.setUTCMinutes(currentUTCTime.getUTCMinutes() + 2);
   //   Two minute behind
-  const twoMinutesBehind = new Date(utc_time);
-  twoMinutesBehind.setUTCMinutes(utc_time.getUTCMinutes() - 2);
+  const twoMinutesBehind = new Date(currentUTCTime);
+  twoMinutesBehind.setUTCMinutes(currentUTCTime.getUTCMinutes() - 2);
 
-  if (utc_time >= twoMinutesBehind && utc_time <= twoMinutesAhead) {
+  if (currentUTCTime >= twoMinutesBehind && currentUTCTime <= twoMinutesAhead) {
     //   CurrentDay
     const today = new Date();
     const daysOfWeek = [
