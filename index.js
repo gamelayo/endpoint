@@ -39,7 +39,8 @@ app.get("/api/", (req, res) => {
     const current_day = daysOfWeek[today.getDay()];
 
     // GitHub URLs
-    const github_file_url = "https://github.com/gamelayo/endpoint/index.js";
+    const github_file_url =
+      "https://github.com/gamelayo/endpoint/blob/master/index.js";
     const github_repo_url = "https://github.com/gamelayo/endpoint";
 
     // Response JSON
